@@ -18,7 +18,7 @@ Resources:
               Name: 'AWS::Include'
               # Replace <bucket> with your bucket name
               Parameters:
-                Location: !Sub s3://${WebsiteBucket}/swagger.yaml
+                Location:  s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger.yaml
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
