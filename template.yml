@@ -9,6 +9,16 @@ Parameters:
     Description: AWS CodeStar projectID used to associate new resources to team members
 
 Resources:
+  ApiGatewayApi:
+      Type: AWS::Serverless::Api
+      Properties:
+        StageName: Prod
+        DefinitionBody:
+            'Fn::Transform':
+              Name: 'AWS::Include'
+              # Replace <bucket> with your bucket name
+              Parameters:
+                Location: !Sub s3://${WebsiteBucket}/swagger.yaml
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
@@ -20,6 +30,7 @@ Resources:
       Events:
         GetEvent:
           Type: Api
+          RestApiId: !Ref ApiGatewayApi
           Properties:
             Path: /
             Method: get
