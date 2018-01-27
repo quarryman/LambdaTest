@@ -10,15 +10,15 @@ Parameters:
 
 Resources:
   ApiGatewayApi:
-      Type: AWS::Serverless::Api
-      Properties:
-        StageName: Prod
-        DefinitionBody:
-            'Fn::Transform':
-              Name: 'AWS::Include'
-              # Replace <bucket> with your bucket name
-              Parameters:
-                Location:  s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger.yaml
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      DefinitionBody:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          # Replace <bucket> with your bucket name
+          Parameters:
+            Location: s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger.yaml
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
