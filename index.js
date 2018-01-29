@@ -4,7 +4,7 @@
    console.log(event);
    context.succeed({
      statusCode: 200,
-     body: 'hi there',
-     headers: {'Content-Type': 'text/html'}
+     body: JSON.stringify({response: 'success'}),
+     headers: {'Content-Type': 'application/json'}
    });
  };
