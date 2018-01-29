@@ -19,7 +19,7 @@ paths:
         responses:
           default:
             statusCode: 200
-        # NOTE: ${LambdaFunction} must match the Lambda resourcename
+        # NOTE: ${LambdaFunction} must match the Lambda resourcename )
         uri:
           Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorld.Arn}/invocations"
 
