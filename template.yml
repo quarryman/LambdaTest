@@ -34,7 +34,7 @@ Resources:
 		  Properties:
 			Path: /test
 			Method: get
-		GetEvent:
+		PostEvent:
 		  Type: Api
 		  RestApiId: !Ref ApiGatewayApi
 		  Properties:
