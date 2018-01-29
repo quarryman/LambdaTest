@@ -71,5 +71,4 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName:
       - !Ref GetHelloWorld
-      - !Ref GetHelloWorldTwo
       Principal: apigateway.amazonaws.com
