@@ -2,7 +2,7 @@
 swagger: 2.0
 basePath: /prod
 info:
-  title: AwsSamExample
+  title: AwsSamExample2
 schemes:
 - https
 paths:
