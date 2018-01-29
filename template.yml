@@ -10,33 +10,33 @@ Parameters:
 
 Resources:
   ApiGatewayApi:
-	Type: AWS::Serverless::Api
-	Properties:
-	  StageName: Prod
-	  DefinitionBody:
-		'Fn::Transform':
-		  Name: 'AWS::Include'
-		  # Replace <bucket> with your bucket name
-		  Parameters:
-			Location: s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger2.yaml
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      DefinitionBody:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          # Replace <bucket> with your bucket name
+          Parameters:
+            Location: s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger2.yaml
   GetHelloWorld:
-	Type: AWS::Serverless::Function
-	Properties:
-	  Handler: index.get
-	  Runtime: nodejs4.3
-	  Role:
-		Fn::ImportValue:
-		  !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
-	  Events:
-		GetEvent:
-		  Type: Api
-		  RestApiId: !Ref ApiGatewayApi
-		  Properties:
-			Path: /test
-			Method: get
-		PostEvent:
-		  Type: Api
-		  RestApiId: !Ref ApiGatewayApi
-		  Properties:
-		    Path: /test
-			Method: post
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.get
+      Runtime: nodejs4.3
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        GetEvent:
+          Type: Api
+          RestApiId: !Ref ApiGatewayApi
+          Properties:
+            Path: /test
+            Method: get
+        PostEvent:
+          Type: Api
+          RestApiId: !Ref ApiGatewayApi
+          Properties:
+            Path: /test
+            Method: post
