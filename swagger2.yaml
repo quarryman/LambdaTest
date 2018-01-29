@@ -6,8 +6,8 @@ info:
 schemes:
 - https
 paths:
-  /:
-    x-amazon-apigateway-any-method:
+  /test:
+    get:
       produces:
       - application/json
       responses:
@@ -21,7 +21,25 @@ paths:
             statusCode: 200
         # NOTE: ${LambdaFunction} must match the Lambda resourcename
         uri:
-          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations"
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorld.Arn}/invocations"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: aws_proxy
+    post:
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: 200
+        # NOTE: ${LambdaFunction} must match the Lambda resourcename
+        uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorld.Arn}/invocations"
 
         passthroughBehavior: when_no_match
         httpMethod: POST
@@ -69,7 +87,7 @@ paths:
       responses: {}
       x-amazon-apigateway-integration:
         uri:
-          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations"
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorld.Arn}/invocations"
         httpMethod: POST
         type: aws_proxy
     options:
