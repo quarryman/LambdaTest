@@ -19,16 +19,6 @@ Resources:
           # Replace <bucket> with your bucket name
           Parameters:
             Location: s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger2.yaml
-  ApiSecondGatewayApi:
-      Type: AWS::Serverless::Api
-      Properties:
-        StageName: Prod
-        DefinitionBody:
-          'Fn::Transform':
-            Name: 'AWS::Include'
-            # Replace <bucket> with your bucket name
-            Parameters:
-              Location: s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger3.yaml
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
@@ -61,7 +51,7 @@ Resources:
         Events:
           GetEvent:
             Type: Api
-            RestApiId: !Ref ApiSecondGatewayApi
+            RestApiId: !Ref ApiGatewayApi
             Properties:
               Path: /pets
               Method: get
