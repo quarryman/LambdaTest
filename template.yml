@@ -5,8 +5,8 @@ Transform:
 
 Parameters:
   ProjectId:
-	Type: String
-	Description: AWS CodeStar projectID used to associate new resources to team members
+    Type: String
+    Description: AWS CodeStar projectID used to associate new resources to team members
 
 Resources:
   ApiGatewayApi:
@@ -18,7 +18,7 @@ Resources:
 		  Name: 'AWS::Include'
 		  # Replace <bucket> with your bucket name
 		  Parameters:
-			Location: s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger.yaml
+			Location: s3://aws-codestar-us-west-2-443954526038-lambdatest-app/swagger2.yaml
   GetHelloWorld:
 	Type: AWS::Serverless::Function
 	Properties:

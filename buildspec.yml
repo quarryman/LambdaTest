@@ -6,7 +6,7 @@ phases:
       - pip install --upgrade awscli
   build:
     commands:
-      - aws s3 cp swagger.yaml s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
+      - aws s3 cp swagger2.yaml s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
 
 artifacts:
