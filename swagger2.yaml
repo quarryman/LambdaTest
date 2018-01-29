@@ -73,6 +73,25 @@ paths:
         requestTemplates:
           application/json: "{\"statusCode\": 200}"
         type: mock
+  /pets:
+      get:
+        produces:
+        - application/json
+        responses:
+          '200':
+            description: 200 response
+            schema:
+              $ref: "#/definitions/Empty"
+        x-amazon-apigateway-integration:
+          responses:
+            default:
+              statusCode: 200
+          # NOTE: ${LambdaFunction} must match the Lambda resourcename
+          uri:
+            Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorldTwo.Arn}/invocations"
+          passthroughBehavior: when_no_match
+          httpMethod: POST
+          type: aws_proxy
 definitions:
   Empty:
     type: object
