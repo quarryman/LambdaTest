@@ -69,6 +69,5 @@ Resources:
     - GetHelloWorld
     Properties:
       Action: lambda:InvokeFunction
-      FunctionName:
-      - !Ref GetHelloWorld
+      FunctionName: !Ref GetHelloWorld
       Principal: apigateway.amazonaws.com
