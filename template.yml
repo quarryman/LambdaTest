@@ -40,3 +40,13 @@ Resources:
           Properties:
             Path: /test
             Method: post
+  # Current workaround needed if you want to use the APIGW Console Test button
+  # See https://github.com/awslabs/serverless-application-model/issues/59#issuecomment-348709355
+  ConfigLambdaPermission:
+    Type: "AWS::Lambda::Permission"
+    DependsOn:
+    - GetHelloWorld
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetHelloWorld
+      Principal: apigateway.amazonaws.com
