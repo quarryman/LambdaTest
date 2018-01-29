@@ -7,7 +7,7 @@ schemes:
 - https
 paths:
   /:
-    get:
+    x-amazon-apigateway-any-method:
       produces:
       - application/json
       responses:
