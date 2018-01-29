@@ -1,7 +1,7 @@
 'use strict';
 
  exports.get = function(event, context) {
-   console.log(event);
+   console.log(event, 'logggggg');
    context.succeed({
      statusCode: 200,
      body: JSON.stringify({response: 'success'}),

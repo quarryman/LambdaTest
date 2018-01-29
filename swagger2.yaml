@@ -6,7 +6,7 @@ info:
 schemes:
 - https
 paths:
-  /test:
+  /test/{testId}:
     get:
       produces:
       - application/json
@@ -15,7 +15,19 @@ paths:
           description: 200 response
           schema:
             $ref: "#/definitions/Empty"
+      parameters:
+        - name: testId
+          in: path
+          description: The unique identifier for a pet
+          type: string
       x-amazon-apigateway-integration:
+        requestTemplates:
+          application/json: |
+            {
+              "body" : {
+                "testId" : "$input.params('testId')"
+              }
+            }
         responses:
           default:
             statusCode: 200
