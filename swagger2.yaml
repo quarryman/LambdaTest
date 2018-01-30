@@ -66,6 +66,27 @@ paths:
         # This is method for Lambda invocation and has nothing to do with API Gateway invocation method
         httpMethod: POST
         type: aws_proxy
+  /issue_path:
+      get:
+        produces:
+        - application/json
+        responses:
+          '200':
+            description: 200 response
+            schema:
+              $ref: "#/definitions/Empty"
+        x-amazon-apigateway-integration:
+          responses:
+            default:
+              statusCode: 200
+          # NOTE: ${LambdaFunction} must match the Lambda resourcename
+          uri:
+            Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorldFour.Arn}/invocations"
+          passthroughBehavior: when_no_match
+          # NOTE: dont change to any value except for POST.
+          # This is method for Lambda invocation and has nothing to do with API Gateway invocation method
+          httpMethod: POST
+          type: aws_proxy
 
   /{proxy}:
     options:

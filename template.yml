@@ -50,6 +50,21 @@ Resources:
               Properties:
                 Path: /new_path
                 Method: get
+  GetHelloWorldFour:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.get2
+      Runtime: nodejs4.3
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        GetEvent:
+          Type: Api
+          RestApiId: !Ref ApiGatewayApi
+          Properties:
+            Path: /issue_path
+            Method: get
 
   # Current workaround needed if you want to use the APIGW Console Test button
   # See https://github.com/awslabs/serverless-application-model/issues/59#issuecomment-348709355
