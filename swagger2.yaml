@@ -1,12 +1,12 @@
 ---
 swagger: 2.0
-basePath: /api
+basePath: /
 info:
-  title: AwsSamExample
+  title: TestIssueAPI
 schemes:
 - https
 paths:
-  /affiliates:
+  /test:
     get:
       produces:
       - application/json
@@ -23,6 +23,8 @@ paths:
         uri:
           Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorld.Arn}/invocations"
         passthroughBehavior: when_no_match
+        # NOTE: dont change to any value except for POST.
+        # This is method for Lambda invocation and has nothing to do with API Gateway invocation method
         httpMethod: POST
         type: aws_proxy
     post:
@@ -40,10 +42,32 @@ paths:
         # NOTE: ${LambdaFunction} must match the Lambda resourcename
         uri:
           Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorld.Arn}/invocations"
-
         passthroughBehavior: when_no_match
         httpMethod: POST
         type: aws_proxy
+  /new_path:
+    get:
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: 200
+        # NOTE: ${LambdaFunction} must match the Lambda resourcename
+        uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetHelloWorldTwo.Arn}/invocations"
+        passthroughBehavior: when_no_match
+        # NOTE: dont change to any value except for POST.
+        # This is method for Lambda invocation and has nothing to do with API Gateway invocation method
+        httpMethod: POST
+        type: aws_proxy
+
+  /{proxy}:
     options:
       consumes:
       - application/json
@@ -67,13 +91,12 @@ paths:
             statusCode: 200
             responseParameters:
               method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Access-Control-Allow-Origin'"
               method.response.header.Access-Control-Allow-Origin: "'*'"
         passthroughBehavior: when_no_match
         requestTemplates:
           application/json: "{\"statusCode\": 200}"
         type: mock
-
 definitions:
   Empty:
     type: object

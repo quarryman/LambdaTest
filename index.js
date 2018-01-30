@@ -16,3 +16,11 @@ exports.get2 = function(event, context) {
 		headers: {'Content-Type': 'application/json'}
 	});
 };
+exports.get3 = function(event, context) {
+	console.log(event, 'logggggg3');
+	context.succeed({
+		statusCode: 200,
+		body: JSON.stringify({response: 'success3'}),
+		headers: {'Content-Type': 'application/json'}
+	});
+};
