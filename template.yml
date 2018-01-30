@@ -46,6 +46,7 @@ Resources:
           Events:
             GetEvent:
               Type: Api
+              RestApiId: !Ref ApiGatewayApi
               Properties:
                 Path: /new_path
                 Method: get
